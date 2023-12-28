@@ -1,11 +1,18 @@
 .hero {
-  background-image: url("./../../public/heroImage.png");
+  background-image: url("./../../public/heroImage3.png");
   background-color:#121212;
-  background-position: center;
+  /* background-position: center; */
+  background-position-x: 65vw;
   background-repeat: no-repeat;
   /* background-size: cover; */
   height: 12rem;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
+.hero-heading {
+    color: #fff;
+    font-size: 1.5rem;
+    position: relative;
+    left: 30vw;
+    font-family: poppins;
+  }
