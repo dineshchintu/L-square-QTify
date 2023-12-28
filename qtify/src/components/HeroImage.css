@@ -1,0 +1,11 @@
+.hero {
+  background-image: url("./../../public/heroImage.png");
+  background-color:#121212;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
