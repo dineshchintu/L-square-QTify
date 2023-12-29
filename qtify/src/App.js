@@ -10,9 +10,9 @@ function App() {
  <Navbar />
  <HeroImage/>
  <Divider />
- <Section type='top' /> 
+ <Section type='top'  isCollapse={true}/> 
  <Divider />
- <Section type='new' /> 
+ <Section type='new' isCollapse={false} /> 
  </>
   );
 }

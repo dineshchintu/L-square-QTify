@@ -4,9 +4,9 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import axios from "axios";
 import Card from './Card';
-export default function Section({type}){
+export default function Section({type,isCollapse}){
     let [albums,setAlbums]=useState([]);
-    let [collapse,setCollapse] = useState(false);
+    let [collapse,setCollapse] = useState(isCollapse);
     useEffect(()=>{
         (async()=>{
             try{
