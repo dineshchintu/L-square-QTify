@@ -4,15 +4,15 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import axios from "axios";
 import Card from './Card';
-export default function Section({type,isCollapse}){
+import Carousel from "./Carousel";
+export default function Section({type}){
     let [albums,setAlbums]=useState([]);
-    let [collapse,setCollapse] = useState(isCollapse);
+    let [collapse,setCollapse] = useState(true);
     useEffect(()=>{
         (async()=>{
             try{
                 let response = await axios.get(`https://qtify-backend-labs.crio.do/albums/${type}`);
                 let data = response.data;
-                if(!collapse) data = data.slice(0,10);
                 setAlbums(data);
             }
             catch(err){
@@ -20,7 +20,7 @@ export default function Section({type,isCollapse}){
                 setAlbums(null);
             }
         })();
-    },[collapse]) 
+    },[]) 
     return(
         <section style={{backgroundColor:'#121212'}}>
         <Box sx={{display:'flex',justifyContent:'space-between'}}>
@@ -28,14 +28,17 @@ export default function Section({type,isCollapse}){
         <Button onClick={()=>{setCollapse((prev)=>!prev)}} variant="text">{collapse? 'Collapse':'Show all'}</Button>    
         </Box>
         {
-            albums && (<Grid container spacing={3}> 
+            albums && collapse && (<Grid container spacing={3}> 
             {albums.map((album)=>{
                 return (<Grid item key={album.id}  lg={4} sx={{maxWidth:'160px !important'}}>
                     <Card image={album.image} title={album.title} follows={album.follows} />
                 </Grid>)
             })}
+ 
              </Grid>)
         }
+                       {albums && !collapse && (<Carousel albums={albums} />)}
+
         </section>
     )    
 }
