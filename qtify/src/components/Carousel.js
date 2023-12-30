@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from './Card';
-import { Navigation} from 'swiper/modules';
+import { Navigation,Autoplay} from 'swiper/modules';
 
 
 // Import Swiper styles
@@ -18,6 +18,7 @@ export default ({albums}) => {
     <Swiper
     
     modules={[Navigation]}
+
     slidesPerView={4}
     navigation
     spaceBetween= {2}
