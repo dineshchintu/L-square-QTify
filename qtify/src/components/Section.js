@@ -7,7 +7,7 @@ import Card from './Card';
 import Carousel from "./Carousel";
 export default function Section({type}){
     let [albums,setAlbums]=useState([]);
-    let [collapse,setCollapse] = useState(true);
+    let [collapse,setCollapse] = useState(false);
     useEffect(()=>{
         (async()=>{
             try{
