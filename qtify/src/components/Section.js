@@ -5,16 +5,18 @@ import Grid from '@mui/material/Grid';
 import axios from "axios";
 import Card from './Card';
 import Carousel from "./Carousel";
-export default function Section({type}){
+import SongsTab from './SongsTab'
+export default function Section({type,songsSection,albumsSection}){
     let [albums,setAlbums]=useState([]);
     let [collapse,setCollapse] = useState(false);
     useEffect(()=>{
         (async()=>{
             try{
-                let response = await axios.get(`https://qtify-backend-labs.crio.do/albums/${type}`);
-                let response2 = await axios.get(`https://qtify-backend-labs.crio.do/songs`)
-                let data = response.data;
-                setAlbums(data);
+                if(albumsSection){
+                    let response = await axios.get(`https://qtify-backend-labs.crio.do/albums/${type}`);
+                    let data = response.data;
+                    setAlbums(data);
+                }
             }
             catch(err){
                 console.log(err);
@@ -25,11 +27,14 @@ export default function Section({type}){
     return(
         <section style={{backgroundColor:'#121212'}}>
         <Box sx={{display:'flex',justifyContent:'space-between'}}>
-        <h3 style={{color:'#fff'}}>{type.substr(0,1).toUpperCase() +type.substr(1) +" Albums"}</h3>    
-        <Button onClick={()=>{setCollapse((prev)=>!prev)}} variant="text">{collapse? 'Collapse':'Show all'}</Button>    
+        {albumsSection && ( <h3 style={{color:'#fff'}}>{type.substr(0,1).toUpperCase() +type.substr(1) +" Albums"}</h3>)}
+        {songsSection && ( <h3 style={{color:'#fff'}}>{"Songs"}</h3>)}   
+        {albumsSection && (<Button onClick={()=>{setCollapse((prev)=>!prev)}} variant="text">{collapse? 'Collapse':'Show all'}</Button>)}
+
+        
         </Box>
         {
-            albums && collapse && (<Grid container spacing={3}> 
+          albumsSection&&   albums && collapse && (<Grid container spacing={3}> 
             {albums.map((album)=>{
                 return (<Grid item key={album.id}  lg={4} sx={{maxWidth:'160px !important'}}>
                     <Card image={album.image} title={album.title} follows={album.follows} />
@@ -38,8 +43,8 @@ export default function Section({type}){
  
              </Grid>)
         }
-                       {albums && !collapse && (<Carousel albums={albums} />)}
-
+        {albumsSection && albums && !collapse && (<Carousel items={albums} />)}
+        {!albumsSection && <SongsTab />}
         </section>
     )    
 }

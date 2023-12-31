@@ -12,7 +12,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import "./Carousel.css"
-export default ({albums}) => {
+export default ({items,boolSongs}) => {
     const navigationNextRef = useRef(null);
     const navigationPrevRef = useRef(null);
     const swiperRef = useRef();
@@ -45,10 +45,16 @@ export default ({albums}) => {
       },
     }}
     >
-      {albums.map((album)=>{
+      {items.map((item)=>{
+        let cardProps = {
+          image: item.image,
+          title: item.title,
+        }
+        if(boolSongs) {cardProps['likes']=item.likes; cardProps['boolSongs'] =true;}
+        else {cardProps['follows']=item.follows; cardProps['boolSongs']=false}
         return (
-            <SwiperSlide key={album.id}>
-            <Card image={album.image} title={album.title} follows={album.follows} />
+            <SwiperSlide key={item.id}>
+            <Card {...cardProps}  />
             </SwiperSlide>
         )
       })}

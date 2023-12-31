@@ -10,9 +10,11 @@ function App() {
  <Navbar />
  <HeroImage/>
  <Divider />
- <Section type='top' /> 
+ <Section albumsSection type='top' /> 
  <Divider />
- <Section type='new' /> 
+ <Section albumsSection type='new' /> 
+ <Divider />
+ <Section songsSection />
  </>
   );
 }
