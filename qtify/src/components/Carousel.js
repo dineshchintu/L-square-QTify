@@ -37,11 +37,11 @@ export default ({albums}) => {
       },
       768: {
         slidesPerView: 6,
-        spaceBetween: 40,
+        spaceBetween: 20,
       },
       1024: {
         slidesPerView: 8,
-        spaceBetween: 50,
+        spaceBetween: 20,
       },
     }}
     >
@@ -54,12 +54,8 @@ export default ({albums}) => {
       })}
 
     </Swiper>
-        <button className='prev' onClick={() => swiperRef.current?.slidePrev()} ref={navigationPrevRef}>
-            <img src='leftNav.png' />
-        </button>
-        <button className='next' onClick={() => swiperRef.current?.slideNext()} ref={navigationNextRef}>
-        <img src='rightNav.png' />
-        </button>
+        <img src='leftNav.png' className='prev' onClick={() => swiperRef.current?.slidePrev()} ref={navigationPrevRef} />
+        <img src='rightNav.png' className='next' onClick={() => swiperRef.current?.slideNext()} ref={navigationNextRef} />
 
 
 

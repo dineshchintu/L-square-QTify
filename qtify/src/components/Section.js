@@ -12,6 +12,7 @@ export default function Section({type}){
         (async()=>{
             try{
                 let response = await axios.get(`https://qtify-backend-labs.crio.do/albums/${type}`);
+                let response2 = await axios.get(`https://qtify-backend-labs.crio.do/songs`)
                 let data = response.data;
                 setAlbums(data);
             }
