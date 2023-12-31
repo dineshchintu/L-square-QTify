@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Card from './Card';
 import { Navigation,Autoplay} from 'swiper/modules';
-
+import IconButton from "@material-ui/core/IconButton";
+import Avatar from "@material-ui/core/Avatar";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,15 +13,22 @@ import 'swiper/css/scrollbar';
 
 import "./Carousel.css"
 export default ({albums}) => {
-    
+    const navigationNextRef = useRef(null);
+    const navigationPrevRef = useRef(null);
+    const swiperRef = useRef();
   return (
-    <div>
+    <div style={{position: 'relative'}}>
     <Swiper
     
     modules={[Navigation]}
-
+    navigation={{
+      prevEl: navigationPrevRef.current,
+      nextEl: navigationNextRef.current,
+    }}
+      onBeforeInit={(swiper) => {
+        swiperRef.current = swiper;
+      }}
     slidesPerView={4}
-    navigation
     spaceBetween= {2}
     breakpoints= {{
       640: {
@@ -44,7 +52,17 @@ export default ({albums}) => {
             </SwiperSlide>
         )
       })}
+
     </Swiper>
+        <button className='prev' onClick={() => swiperRef.current?.slidePrev()} ref={navigationPrevRef}>
+            <img src='leftNav.png' />
+        </button>
+        <button className='next' onClick={() => swiperRef.current?.slideNext()} ref={navigationNextRef}>
+        <img src='rightNav.png' />
+        </button>
+
+
+
     </div>
     
   );
